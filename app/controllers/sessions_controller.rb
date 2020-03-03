@@ -1,17 +1,9 @@
 class SessionsController < ApplicationController
-  # before_action :set_session, only: [:show, :edit, :update, :destroy]
 
-  # My sessions were kinda broken in datapond,
-    # DEFINITELY NEED TO FIX
-    # Problem in datapond is not having a sessions model maybe? s
-
-  # GET /sessions
-  # GET /sessions.json
   def index
     @sessions = Session.all
   end
 
-  # GET /sessions/new
   def new
     @session = Session.new
   end

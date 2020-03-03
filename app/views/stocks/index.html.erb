@@ -1,40 +1,51 @@
 <p id="notice"><%= notice %></p>
 
-<h3> Transactions and buy stocks </h3>
+<% if !@user %>
+Welcome to Stockifier! <br/>
+Please sign up or sign in. <br/><br/>
 
-<h4><%= link_to 'Buy Stocks', new_stock_path %></h4>
+Here you have $5000 to invest in whichever DOW 30 stocks you would like.<br/>
+You can see your portfolio, with fun colors depending on how the stock is doing, and all the transcations you've made. 
 
+<% end %>
+
+
+<% if @user %>
+  <br/>
+  <h2><%= link_to 'Buy Stocks', new_stock_path %></h2>
+  <br/>
+  <h3>You have: $<%= 5000 - @stocks_sum %> left to invest</h3>
+  <h5>I am using an API sandbox, so we have access to the DOW 30 stocks data only. <br/> For example:
+  AAPL, IBM, GS, MMM, BA, KO, DIS, etc. </h5>
 <br/>
-<h3>You have: $<%= 5000 - @stocks_sum %> left to invest</h3>
-<h5>I am using a free API sandbox, so we have access to the DOW 30 stocks data only. <br/> For example:
-AAPL, IBM, GS, MMM, BA, KO, DIS, etc. </h5>
+<br/>
+  <h2>Transactions:</h2>
 
-<h1>Stocks</h1>
-
-# If current user, see these stocks
-
-  <table>
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Ticker</th>
-        <th>Shares</th>
-        <th>Price</th>
-        <th colspan="4"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @stocks.each do |stock| %>
+  # If current user, see these stocks
+    <table>
+      <thead>
         <tr>
-          <td><%= stock.user_id %></td>
-          <td><%= stock.ticker %></td>
-          <td><%= stock.shares %></td>
-          <td><%= stock.price %></td>
+          <th>User</th>
+          <th>Ticker</th>
+          <th>Shares</th>
+          <th>Price</th>
+          <th colspan="4"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @stocks.each do |stock| %>
+          <tr>
+            <td><%= stock.user_id %></td>
+            <td><%= stock.ticker %></td>
+            <td><%= stock.shares %></td>
+            <td><%= stock.price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<br>
+  <br>
+<% end %>
+
 
 
