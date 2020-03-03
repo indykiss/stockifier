@@ -1,31 +1,33 @@
-class SessionsController < ApplicationController
 
-  def index
-    @sessions = Session.all
-  end
+class SessionsController < ApplicationController
+  helper_method :current_user 
 
   def new
-    @session = Session.new
+    @user = User.new
   end
 
-  def create
-    @session = Session.new(session_params)
-    session[:user_id] = @user.id
+  def sign_in
+  end 
 
-    respond_to do |format|
-      if @session.save
-        format.html { redirect_to @session, notice: 'Session was successfully created.' }
-        format.json { render :show, status: :created, location: @session }
-      else
-        format.html { render :new }
-        format.json { render json: @session.errors, status: :unprocessable_entity }
-      end
+  def create
+    @user = User.find_by(email: params[:email])
+    if @user && @user.authenticate(params[:password])
+       sessions[:user_id] = @user.id
+       redirect_to '/'
+    else
+       redirect_to '/signin'
+       flash[:alert] = "Sorry, please try to sign up."
     end
   end
 
   def destroy
-    @session.destroy
-    redirect_to root_path
+    log_out
+    redirect_to '/'
+  end
+
+  def log_out
+    reset_session
+    @current_user = nil
   end
 
 end

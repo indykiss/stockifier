@@ -14,14 +14,12 @@ You can see your portfolio, with fun colors depending on how the stock is doing,
   <br/>
   <h2><%= link_to 'Buy Stocks', new_stock_path %></h2>
   <br/>
-  <h3>You have: $<%= 5000 - @stocks_sum %> left to invest</h3>
-  <h5>I am using an API sandbox, so we have access to the DOW 30 stocks data only. <br/> For example:
-  AAPL, IBM, GS, MMM, BA, KO, DIS, etc. </h5>
+  <h3>You have $<%= 5000 - @stocks_sum %> left to invest</h3>
+  <h5>I am using an API sandbox, so we have access to the DOW 30 stocks data only. <br/></h5>
 <br/>
 <br/>
   <h2>Transactions:</h2>
 
-  # If current user, see these stocks
     <table>
       <thead>
         <tr>

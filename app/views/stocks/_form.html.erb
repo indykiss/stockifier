@@ -22,14 +22,15 @@
     <% end %>
 
     <%= f.label :ticker, "Ticker: " %>
-    <%= f.text_field :ticker %>
-    <br>
+    <%= f.select :ticker, ['MMM', 'AXP', 'AAPL', 'BA', 'CAT', 'CVX', 'CSCO', 'KO', 'DIS', 'DOW', 'XOM', 'GS', 'HD', 'IBM', 'INTC', 'JNJ', 'JPM', 'MCD', 'MRK', 'MSFT', 'NKE', 'PFE', 'PG', 'TRV', 'UTX', 'UNH', 'VZ', 'V', 'WMT', 'WBA']%>
+
+    <br/>
 
     <%= f.label :shares, "Shares: " %>
     <%= f.number_field :shares %>
     <br>
     
-    <%= f.submit "Buy the stock" %> 
+    <%= f.submit "Buy the stock", :disabled => !@can_i_buy %> 
 
 <% end %>
 </h4>

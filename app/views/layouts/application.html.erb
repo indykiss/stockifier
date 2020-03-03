@@ -46,14 +46,13 @@
       <div class="nav-item">
         <%= link_to "Portfolio", portfolios_path %>
       </div>
-
-      <div class="nav-item">
-        <%= link_to "Transactions", stocks_path %>
-      </div>  
       
         <% else %>
-      <h2> <%= link_to "Sign up", signup_path %></h2>
-      <h2> <%= link_to "Sign in", signin_path %></h2>
+      <h3>
+      <%= button_to "Sign In", '/signin', method: :get%>
+      <%= button_to "Sign Up", '/users/new', method: :get%>
+      </h3>
+
     <% end %>
     </div>
 

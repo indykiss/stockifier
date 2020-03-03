@@ -1,5 +1,14 @@
-<h1>New Session</h1>
 
-<%= render 'form', session: @session %>
+<h1>Sign in</h1>
 
-<%= link_to 'Back', sessions_path %>
+<%= form_for @user do |f| %>
+
+    <%= f.label :email, "Email: " %>
+    <%= f.text_field :email %>
+
+    <%= f.label :password, "Password: " %>
+    <%= f.password_field :password %>
+
+    <%= f.submit "Submit" %> 
+
+<% end %>

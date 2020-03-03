@@ -1,5 +1,6 @@
 
 class StocksController < ApplicationController
+  helper_method :current_user 
 
   def index
     @user = current_user
@@ -15,17 +16,14 @@ class StocksController < ApplicationController
 
   def new
     @stock = Stock.new
-
-  end
-
-  def edit
   end
 
   def create
     @stock = Stock.new(stock_params)
+    @stocks = Stock.all
     @stock.user_id = current_user.id
 
-    # Setup authorization
+    # Setup authorization for API call
     @api_call = Intrinio.configure do |config|
         config.api_key['api_key'] = 'OjUyOGY1MjM0ZmE1OGYzM2I1ZDY2MjA0OWNiOGQ5Zjc5'
       end
@@ -48,6 +46,19 @@ class StocksController < ApplicationController
       render :new 
     end 
 
+    # Setup can't buy anymore stock if spent more than $5000 
+    @stocks_sum = 0;
+    @can_i_buy = false;
+
+    @stocks.each do |stock|
+      if stock.price
+        @stocks_sum = @stocks_sum + stock.price
+      end  
+    end 
+
+    if @stocks_sum < 0 
+      @can_i_buy = false
+    end 
   end 
 
 
@@ -75,71 +86,6 @@ class StocksController < ApplicationController
     def stock_params
       params.require(:stock).permit(:user_id, :ticker, :shares, :price)
     end
-
-    # Many failed API call attempts
-
-    # Switching from yahoo finance to alpha vantage: OQM57GJJ6L5WU09S
-    def find_stock(url)
-      response = Excon.get(
-        url,
-        headers: {
-          "function": "TIME_SERIES_INTRADAY",
-          "symbol": "#{stock}",
-          "accesskey": "924-1562307531-a10YmE4+XL7MiJHROzyMOrVKldLK2zNOTJ+IClDbqiQ=",
-          "outputsize": "full",
-          "apikey": ENV["OQM57GJJ6L5WU09S"]
-        }
-      )
-      return nil if response.status != 200
-      stock = JSON.parse(response.body)
-      # self.prices = stock["Time Series (Daily)"]
-    end
-
-    def find_ticker(name)
-      find_stock(
-        "" 
-      )
-    end 
-
-    def request_api_RAPID_API_YAHOO_FINANCE(url)
-      response = Excon.get(
-        url,
-        headers: {
-           'X-RapidAPI-Host' => URI.parse(apidojo-yahoo-finance-v1.p.rapidapi.com).host,
-           'X-RapidAPI-Key' => ENV.fetch('a61e7cbcbfmsh4f224d73a4003a1p181792jsncaa3ff879ac4')
-        }
-      )
-      return nil if response.status != 200
-      JSON.parse(response.body)
-    end
-
-    def find_stock_RAPID_API(name)
-      # Problem here
-      request_api(
-        "https://rapidapi.com/apidojo/api/yahoo-finance1/#{URI.encode(name)}"
-      )
-    end 
-
-    def ticker_price_RAPID_API(regularMarketOpen, currentPrice)
-      query = URI.encode("#{regularMarketOpen},#{currentPrice}")
-
-      request_api(
-        "https://rapidapi.com/apidojo/api/yahoo-finance1/#{URI.encode(name)}"
-      )
-    end 
-
-    # Search for opening/current price
-    def search_openingPrice
-      @stock = find_stock(params[:stock])
-      # added for API integration attempt
-      unless @stock 
-        flash[:alert] = "Ticker not found"
-        return render action :index
-      end 
-
-      @ticker = stock.first
-      @ticker_price = find_price(@ticker['regularMarketOpen'], @ticker['currentPrice'])
-    end 
 
 end 
 
