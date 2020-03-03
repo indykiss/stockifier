@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+
+    <title>Stockifier</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-default bg-light">
+    <div class="nav-item">
+
+      <% if current_user %>
+        <button class="btn btn-sm btn-outline-secondary" type="button">
+        <%= link_to "Sign out", signout_path, method: :delete %></button>
+      </div>
+
+      <div class="nav-item">
+        <%= link_to "Home", "/" %>
+      </div>
+
+      <div class="nav-item">
+        <%= link_to "Buy Stocks", stocks_path %>
+      </div>
+
+      <div class="nav-item">
+        <%= link_to "Portfolio", portfolios_path %>
+      </div>
+
+      <div class="nav-item">
+        <%= link_to "Transactions", stocks_path %>
+      </div>  
+      
+        <% else %>
+      <h2> <%= link_to "Sign up", signup_path %></h2>
+      <h2> <%= link_to "Sign in", signin_path %></h2>
+    <% end %>
+    </div>
+
+    <div id = "app-container">
+        <%= yield %>
+    </div>
+
+  </div>
+
+  </body>
+</html>
+
+
+
+
+
+
+

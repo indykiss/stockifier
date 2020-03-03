@@ -1,0 +1,14 @@
+<br><h1>Welcome to Stockifier </h1> <br>
+
+<h4> What is Stockifier? </h4>
+<p> Pretend you have $5000 to invest in a fake stock market. </p>
+
+
+<% if false %>
+    <% if logged_in?%>
+        <br>
+        <button><%= link_to "See your portfolio", stocks_path %></button>
+        <br>
+        <button><%= link_to "Buy some stocks", new_stock_path %></button>
+    <% end %>
+<% end %>

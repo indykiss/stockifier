@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h3> Transactions and buy stocks </h3>
+
+<h4><%= link_to 'Buy Stocks', new_stock_path %></h4>
+
+<br/>
+<h3>You have: $<%= 5000 - @stocks_sum %> left to invest</h3>
+<h5>I am using a free API sandbox, so we have access to the DOW 30 stocks data only. <br/> For example:
+AAPL, IBM, GS, MMM, BA, KO, DIS, etc. </h5>
+
+<h1>Stocks</h1>
+
+# If current user, see these stocks
+
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Ticker</th>
+        <th>Shares</th>
+        <th>Price</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stocks.each do |stock| %>
+        <tr>
+          <td><%= stock.user_id %></td>
+          <td><%= stock.ticker %></td>
+          <td><%= stock.shares %></td>
+          <td><%= stock.price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<br>
+
+

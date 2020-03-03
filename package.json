@@ -1,0 +1,7 @@
+{
+  "name": "stockifier",
+  "private": true,
+  "dependencies": {
+    "bcrypt": "^4.0.0"
+  }
+}
