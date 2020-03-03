@@ -1,11 +1,14 @@
+
 <br><h1>Welcome to Stockifier </h1> <br>
 <% if logged_in? %>
-    <h1>You are Logged In, <%= current_user.email %></h1>
+    <h4>You are Logged In, <%= current_user.email %></h4>
 <%end%>
 
-<h4> What is Stockifier? </h4>
-<p> Pretend you have $5000 to invest in a fake stock market. </p>
-
+<h5> In this app, you can purchase DOW30 stocks. You are given $5000 
+to invest as you please. You can purchase stock at its current price; data
+from an API implementation from Intrinio.<br/>
+You can view all the transcations that you have made, purchase stocks, 
+and view your current portfolio. </h5>
 
 <% if false %>
     <% if logged_in?%>
