@@ -46,19 +46,20 @@ class StocksController < ApplicationController
       render :new 
     end 
 
-    # Setup can't buy anymore stock if spent more than $5000 
-    @stocks_sum = 0;
-    @can_i_buy = false;
+    # Can't buy anymore stock if spent more than $5000
+      # Idea is to disable the submit button if slightly in debt 
+    # @stocks_sum = 0;
+    # @can_i_buy = false;
 
-    @stocks.each do |stock|
-      if stock.price
-        @stocks_sum = @stocks_sum + stock.price
-      end  
-    end 
+    # @stocks.each do |stock|
+    #   if stock.price
+    #     @stocks_sum = @stocks_sum + stock.price
+    #   end  
+    # end 
 
-    if @stocks_sum < 0 
-      @can_i_buy = false
-    end 
+    # if @stocks_sum < 0 
+    #   @can_i_buy = false
+    # end 
   end 
 
 
