@@ -2,6 +2,6 @@
   "name": "stockifier",
   "private": true,
   "dependencies": {
-    "bcrypt": "^4.0.0"
+    "bcrypt": "^5.0.0"
   }
 }
